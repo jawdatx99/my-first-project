@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Department</title>
+    <link rel="stylesheet" href="{{url_for('style')}}">
+</head>
+
+<body>
+    <nav class="bg-white shadow-xl w-full py-2 px-[150px]">
+        <div class="flex gap-8 w-full">
+            <a href="{{url_for('doctorsIndex')}}" class="hover:scale-105 hover:font-bold transition-all">Doctors</a>
+            <a href="{{url_for('roomsIndex')}}" class="hover:scale-105 hover:font-bold transition-all">Rooms</a>
+            <a href="{{url_for('meetingTimesIndex')}}" class="hover:scale-105 hover:font-bold transition-all">Meeting
+                times</a>
+            <a href="{{url_for('departmentsIndex')}}"
+                class="hover:scale-105 hover:font-bold transition-all my-auto font-bold ">Departments</a>
+            <a href="{{url_for('coursesIndex')}}" class="hover:scale-105 hover:font-bold transition-all">Courses</a>
+            <a href="{{url_for('scheduleIndex')}}" class="hover:scale-105 hover:font-bold transition-all my-auto text-white bg-green-500 rounded hover:shadow-lg px-4 py-1 justify-self-end ml-auto">Schedule</a>
+        </div>
+    </nav>
+    <main class="py-[25px] px-[150px]">
+        <div class="bg-white rounded-xl shadow-xl w-full p-4">
+            <div class="flex w-full justify-between">
+                <h1 class="font-bold my-auto">
+                    <a class="text-gray-400" href="{{url_for('departmentsIndex')}}">Departments</a> - Add Department
+                </h1>
+            </div>
+            <hr class="mt-3">
+            <form action="{{url_for('storeDepartment')}}" class="mt-4" method="POST">
+                <div class=" mt-2">
+                    <label for="name" class="form-label">Department Name</label>
+                    <input type="text" name="name" id="name" class="form-input" required>
+                </div>
+                
+
+                <div class="mt-4">
+                    <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg">Add Department</button>
+                </div>
+            </form>
+
+        </div>
+    </main>
+    <template id="course_line">
+        <div class="flex gap-2 mb-2">
+            <select name="course_id[]" id="" class="form-input" required>
+                <option value="1">MT129</option>
+                <option value="2">MT131</option>
+                <option value="3">MT132</option>
+            </select>
+            <button class="remove_line">&times;</button>
+        </div>
+    </template>
+    <script>
+        const addCourse = document.querySelector('.add-course');
+        addCourse.addEventListener('click', (e) => {
+            e.preventDefault();
+            const courseLine = document.querySelector('#course_line');
+            const courses = document.querySelector('#courses');
+            courses.appendChild(courseLine.content.cloneNode(true));
+            const removeLine = document.querySelectorAll('.remove_line');
+            removeLine.forEach((line) => {
+                line.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.target.parentElement.remove();
+                });
+            });
+        });
+        // remove new lines
+    </script>
+</body>
+
+</html>
